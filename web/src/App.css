@@ -1,0 +1,284 @@
+/* web/src/App.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+header button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.app-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+  border-left: 4px solid #4caf50;
+}
+
+.app-card.status-critical {
+  border-left-color: #f44336;
+}
+
+.app-card.status-major {
+  border-left-color: #ff9800;
+}
+
+.app-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-card h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.vendor {
+  color: #666;
+  font-size: 14px;
+  margin: 4px 0 12px;
+}
+
+.issue-counts {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.issue-counts .critical { color: #f44336; }
+.issue-counts .major { color: #ff9800; }
+.issue-counts .minor { color: #666; }
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.error {
+  color: #f44336;
+}
+
+/* Application Detail */
+.detail-header {
+  margin-bottom: 24px;
+}
+
+.detail-header h2 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.filters {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.issues-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.issue-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.issue-card:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.issue-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.severity-badge {
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.issue-type {
+  background: #e0e0e0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.issue-date {
+  margin-left: auto;
+  color: #666;
+  font-size: 12px;
+}
+
+.issue-card h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.issue-summary {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.issue-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #999;
+}
+
+.no-issues {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+/* Issue Detail */
+.issue-detail {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.issue-detail-header {
+  margin-bottom: 24px;
+}
+
+.issue-detail-header h2 {
+  margin-top: 12px;
+  font-size: 24px;
+}
+
+.severity-badge.large {
+  font-size: 14px;
+  padding: 4px 12px;
+}
+
+.issue-detail-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.meta-item label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.meta-item span {
+  font-weight: 500;
+}
+
+.issue-section {
+  margin-bottom: 24px;
+}
+
+.issue-section h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.issue-section p {
+  line-height: 1.6;
+  color: #444;
+}
+
+.source-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #2196f3;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.source-link:hover {
+  background: #1976d2;
+}
+
+.raw-content {
+  margin-top: 24px;
+}
+
+.raw-content summary {
+  cursor: pointer;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.raw-content pre {
+  background: #f5f5f5;
+  padding: 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
