@@ -1,0 +1,17 @@
+{
+  "name": "it-issue-tracker-api",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "test": "node --test tests/"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.11.5",
+    "pgvector": "^0.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  }
+}
