@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import ApplicationList from './pages/ApplicationList';
 import ApplicationDetail from './pages/ApplicationDetail';
+import IssueDetail from './pages/IssueDetail';
 
 function App() {
   const [selectedApp, setSelectedApp] = useState(null);
@@ -29,7 +30,7 @@ function App() {
         ) : !selectedIssue ? (
           <ApplicationDetail app={selectedApp} onSelectIssue={setSelectedIssue} />
         ) : (
-          <div>Issue detail coming soon: {selectedIssue.title}</div>
+          <IssueDetail issue={selectedIssue} />
         )}
       </main>
     </div>
