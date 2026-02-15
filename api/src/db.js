@@ -5,13 +5,22 @@ import pgvector from 'pgvector/pg';
 const { Pool } = pg;
 
 let pool = null;
+let typesRegistered = false;
 
 export async function getPool() {
   if (!pool) {
     pool = new Pool({
       connectionString: process.env.DATABASE_URL
     });
-    await pgvector.registerType(pool);
+  }
+  if (!typesRegistered) {
+    const client = await pool.connect();
+    try {
+      await pgvector.registerTypes(client);
+    } finally {
+      client.release();
+    }
+    typesRegistered = true;
   }
   return pool;
 }
