@@ -45,7 +45,7 @@ CREATE TABLE issues (
 );
 
 -- Indexes
-CREATE INDEX idx_issues_embedding ON issues USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+CREATE INDEX idx_issues_embedding ON issues USING hnsw (embedding vector_cosine_ops);
 CREATE INDEX idx_issues_app_severity ON issues (application_id, severity);
 CREATE INDEX idx_issues_version ON issues (version_id);
 CREATE INDEX idx_issues_fulltext ON issues USING gin (to_tsvector('english', title || ' ' || summary));
