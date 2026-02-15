@@ -18,10 +18,81 @@ body {
 }
 
 header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   margin-bottom: 24px;
 }
 
 header h1 {
   font-size: 24px;
   font-weight: 600;
+}
+
+header button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.app-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+  border-left: 4px solid #4caf50;
+}
+
+.app-card.status-critical {
+  border-left-color: #f44336;
+}
+
+.app-card.status-major {
+  border-left-color: #ff9800;
+}
+
+.app-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-card h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.vendor {
+  color: #666;
+  font-size: 14px;
+  margin: 4px 0 12px;
+}
+
+.issue-counts {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.issue-counts .critical { color: #f44336; }
+.issue-counts .major { color: #ff9800; }
+.issue-counts .minor { color: #666; }
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.error {
+  color: #f44336;
 }
