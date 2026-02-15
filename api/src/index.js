@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import applicationsRouter from './routes/applications.js';
+import issuesRouter from './routes/issues.js';
+import searchRouter from './routes/search.js';
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/applications', applicationsRouter);
+app.use('/api/issues', issuesRouter);
+app.use('/api/search', searchRouter);
 
 app.listen(PORT, () => {
   console.log(`API server running on http://localhost:${PORT}`);
