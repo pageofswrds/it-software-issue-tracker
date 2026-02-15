@@ -8,6 +8,7 @@ function ApplicationDetail({ app, onSelectIssue }) {
   const [severityFilter, setSeverityFilter] = useState('');
 
   useEffect(() => {
+    setLoading(true);
     const url = severityFilter
       ? `/api/applications/${app.id}/issues?severity=${severityFilter}`
       : `/api/applications/${app.id}/issues`;
@@ -16,6 +17,10 @@ function ApplicationDetail({ app, onSelectIssue }) {
       .then(res => res.json())
       .then(data => {
         setIssues(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching issues:', err);
         setLoading(false);
       });
   }, [app.id, severityFilter]);

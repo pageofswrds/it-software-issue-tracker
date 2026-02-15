@@ -33,6 +33,8 @@ router.get('/', async (req, res) => {
     const queryEmbedding = embeddingResponse.data[0].embedding;
 
     // Semantic search with cosine similarity
+    const parsedLimit = Math.min(Math.max(parseInt(limit) || 20, 1), 100);
+
     const issues = await query(`
       SELECT
         i.*,
@@ -44,7 +46,7 @@ router.get('/', async (req, res) => {
       WHERE i.embedding IS NOT NULL
       ORDER BY i.embedding <=> $1::vector
       LIMIT $2
-    `, [`[${queryEmbedding.join(',')}]`, parseInt(limit)]);
+    `, [`[${queryEmbedding.join(',')}]`, parsedLimit]);
 
     res.json(issues);
   } catch (err) {

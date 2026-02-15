@@ -42,10 +42,14 @@ class AnthropicProvider(LLMProvider):
         response_text = response.content[0].text.strip()
         data = json.loads(response_text)
 
+        severity = data.get("severity", "minor").lower()
+        if severity not in ("critical", "major", "minor"):
+            severity = "minor"
+
         return IssueAnalysis(
             title=data.get("title", "Unknown Issue"),
             summary=data.get("summary", ""),
-            severity=data.get("severity", "minor"),
+            severity=severity,
             issue_type=data.get("issue_type"),
             version_mentioned=data.get("version_mentioned"),
             has_workaround=data.get("has_workaround", False)
