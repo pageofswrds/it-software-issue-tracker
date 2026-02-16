@@ -1,7 +1,7 @@
 // web/src/components/AddApplicationModal.jsx
 import { useState } from 'react';
 
-function AddApplicationModal({ onClose, onCreated }) {
+function AddApplicationModal({ onClose, onCreated, demoMode, onDemoSubmit }) {
   const [name, setName] = useState('');
   const [vendor, setVendor] = useState('');
   const [keywords, setKeywords] = useState('');
@@ -10,6 +10,10 @@ function AddApplicationModal({ onClose, onCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (demoMode) {
+      onDemoSubmit();
+      return;
+    }
     setSubmitting(true);
     setError(null);
 

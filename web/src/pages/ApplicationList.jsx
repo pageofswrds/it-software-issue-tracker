@@ -8,7 +8,7 @@ function ApplicationList({ onSelectApp }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/applications')
+    fetch('/data/applications.json')
       .then(res => res.json())
       .then(data => {
         setApplications(data);

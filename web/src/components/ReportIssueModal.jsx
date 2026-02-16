@@ -1,7 +1,7 @@
 // web/src/components/ReportIssueModal.jsx
 import { useState, useEffect } from 'react';
 
-function ReportIssueModal({ onClose, onCreated }) {
+function ReportIssueModal({ onClose, onCreated, demoMode, onDemoSubmit }) {
   const [applications, setApplications] = useState([]);
   const [applicationId, setApplicationId] = useState('');
   const [title, setTitle] = useState('');
@@ -13,7 +13,7 @@ function ReportIssueModal({ onClose, onCreated }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/applications')
+    fetch('/data/applications.json')
       .then(res => res.json())
       .then(data => setApplications(data))
       .catch(() => {});
@@ -21,6 +21,10 @@ function ReportIssueModal({ onClose, onCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (demoMode) {
+      onDemoSubmit();
+      return;
+    }
     setSubmitting(true);
     setError(null);
 

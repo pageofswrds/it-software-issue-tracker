@@ -1,17 +1,19 @@
 // web/src/App.jsx
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import ApplicationList from './pages/ApplicationList';
 import ApplicationDetail from './pages/ApplicationDetail';
 import IssueDetail from './pages/IssueDetail';
 import AddApplicationModal from './components/AddApplicationModal';
 import ReportIssueModal from './components/ReportIssueModal';
 
+const DEMO_MODE = true;
+
 function App() {
   const [selectedApp, setSelectedApp] = useState(null);
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [showAddApp, setShowAddApp] = useState(false);
   const [showReportIssue, setShowReportIssue] = useState(false);
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [demoToast, setDemoToast] = useState(null);
 
   const handleBack = () => {
     if (selectedIssue) {
@@ -21,9 +23,12 @@ function App() {
     }
   };
 
-  const handleCreated = useCallback(() => {
-    setRefreshKey(k => k + 1);
-  }, []);
+  useEffect(() => {
+    if (demoToast) {
+      const timer = setTimeout(() => setDemoToast(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [demoToast]);
 
   return (
     <div className="app">
@@ -36,16 +41,23 @@ function App() {
         </div>
         <div className="header-right">
           <button className="btn-header btn-new-request" onClick={() => setShowAddApp(true)}>
-            + New Request
+            + New Application
           </button>
           <button className="btn-header btn-manual-entry" onClick={() => setShowReportIssue(true)}>
             + Manual Entry
           </button>
         </div>
       </header>
+
+      {demoToast && (
+        <div className="demo-toast">
+          {demoToast}
+        </div>
+      )}
+
       <main>
         {!selectedApp ? (
-          <ApplicationList key={refreshKey} onSelectApp={setSelectedApp} />
+          <ApplicationList onSelectApp={setSelectedApp} />
         ) : !selectedIssue ? (
           <ApplicationDetail app={selectedApp} onSelectIssue={setSelectedIssue} />
         ) : (
@@ -55,14 +67,22 @@ function App() {
 
       {showAddApp && (
         <AddApplicationModal
+          demoMode={DEMO_MODE}
           onClose={() => setShowAddApp(false)}
-          onCreated={handleCreated}
+          onDemoSubmit={() => {
+            setShowAddApp(false);
+            setDemoToast('Submissions are disabled in demo mode.');
+          }}
         />
       )}
       {showReportIssue && (
         <ReportIssueModal
+          demoMode={DEMO_MODE}
           onClose={() => setShowReportIssue(false)}
-          onCreated={handleCreated}
+          onDemoSubmit={() => {
+            setShowReportIssue(false);
+            setDemoToast('Submissions are disabled in demo mode.');
+          }}
         />
       )}
     </div>

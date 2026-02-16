@@ -10,7 +10,7 @@ function ApplicationDetail({ app, onSelectIssue }) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/applications/${app.id}/issues`)
+    fetch(`/data/issues/${app.id}.json`)
       .then(res => res.json())
       .then(data => {
         setIssues(data);
