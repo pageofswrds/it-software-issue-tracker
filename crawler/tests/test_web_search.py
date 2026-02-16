@@ -10,7 +10,7 @@ def test_search_suffixes_exist():
 
 
 def test_build_queries():
-    ws = WebSearch()
+    ws = WebSearch(api_key="test-key")
     queries = ws.build_queries(["adobe acrobat", "acrobat dc"])
     # Should produce keyword x suffix combinations
     assert len(queries) == len(["adobe acrobat", "acrobat dc"]) * len(SEARCH_SUFFIXES)
@@ -19,12 +19,12 @@ def test_build_queries():
 
 
 def test_search_deduplicates_by_url():
-    ws = WebSearch()
+    ws = WebSearch(api_key="test-key")
 
     fake_results = [
-        {"href": "https://example.com/page1", "title": "Page 1", "body": "Snippet 1"},
-        {"href": "https://example.com/page1", "title": "Page 1 dup", "body": "Snippet dup"},
-        {"href": "https://example.com/page2", "title": "Page 2", "body": "Snippet 2"},
+        {"url": "https://example.com/page1", "title": "Page 1", "description": "Snippet 1"},
+        {"url": "https://example.com/page1", "title": "Page 1 dup", "description": "Snippet dup"},
+        {"url": "https://example.com/page2", "title": "Page 2", "description": "Snippet 2"},
     ]
 
     with patch.object(ws, "_search_single_query", return_value=fake_results):
@@ -35,10 +35,10 @@ def test_search_deduplicates_by_url():
 
 
 def test_search_returns_web_search_results():
-    ws = WebSearch()
+    ws = WebSearch(api_key="test-key")
 
     fake_results = [
-        {"href": "https://example.com/page1", "title": "Page 1", "body": "Snippet 1"},
+        {"url": "https://example.com/page1", "title": "Page 1", "description": "Snippet 1"},
     ]
 
     with patch.object(ws, "_search_single_query", return_value=fake_results):
