@@ -32,7 +32,7 @@ function App() {
           {(selectedApp || selectedIssue) && (
             <button onClick={handleBack}>&larr; Back</button>
           )}
-          <h1>IT Issue Tracker</h1>
+          <h1>Enterprise IT Patch Crowdsourcer</h1>
         </div>
         <div className="header-right">
           <button className="btn-header btn-new-request" onClick={() => setShowAddApp(true)}>
