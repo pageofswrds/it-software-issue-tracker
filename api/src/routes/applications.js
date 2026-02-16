@@ -68,4 +68,28 @@ router.get('/:id/issues', async (req, res) => {
   }
 });
 
+// Create new application
+router.post('/', async (req, res) => {
+  try {
+    const { name, vendor, keywords } = req.body;
+    if (!name) {
+      return res.status(400).json({ error: 'Application name is required' });
+    }
+    const keywordArray = keywords
+      ? keywords.split(',').map(k => k.trim()).filter(Boolean)
+      : [name.toLowerCase()];
+
+    const app = await queryOne(
+      `INSERT INTO applications (name, vendor, keywords)
+       VALUES ($1, $2, $3)
+       RETURNING *`,
+      [name, vendor || null, keywordArray]
+    );
+    res.status(201).json(app);
+  } catch (err) {
+    console.error('Error creating application:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 export default router;
