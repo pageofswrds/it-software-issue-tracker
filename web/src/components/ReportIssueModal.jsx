@@ -29,7 +29,7 @@ function ReportIssueModal({ onClose, onCreated }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          application_id: parseInt(applicationId),
+          application_id: applicationId,
           title,
           summary,
           severity,
