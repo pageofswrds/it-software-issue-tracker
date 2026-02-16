@@ -1,3 +1,5 @@
-from .reddit import RedditSource, RedditPost
+from .models import WebSearchResult, FetchedPage
+from .web_search import WebSearch
+from .web_fetcher import WebFetcher
 
-__all__ = ['RedditSource', 'RedditPost']
+__all__ = ['WebSearchResult', 'FetchedPage', 'WebSearch', 'WebFetcher']
