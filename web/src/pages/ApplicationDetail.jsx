@@ -1,11 +1,12 @@
 // web/src/pages/ApplicationDetail.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import IssueCard from '../components/IssueCard';
 
 function ApplicationDetail({ app, onSelectIssue }) {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [collapsed, setCollapsed] = useState({});
+  const sectionRefs = useRef({});
 
   useEffect(() => {
     setLoading(true);
@@ -23,6 +24,15 @@ function ApplicationDetail({ app, onSelectIssue }) {
 
   const toggleSection = (severity) => {
     setCollapsed(prev => ({ ...prev, [severity]: !prev[severity] }));
+  };
+
+  const scrollToSection = (severity) => {
+    // Expand the section if collapsed
+    setCollapsed(prev => ({ ...prev, [severity]: false }));
+    // Scroll to the section
+    setTimeout(() => {
+      sectionRefs.current[severity]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   };
 
   const grouped = {
@@ -43,9 +53,9 @@ function ApplicationDetail({ app, onSelectIssue }) {
         <h2>{app.name}</h2>
         <p className="vendor">{app.vendor || 'Unknown vendor'}</p>
         <div className="issue-counts-summary">
-          <span className="critical">{grouped.critical.length} Critical</span>
-          <span className="major">{grouped.major.length} Major</span>
-          <span className="minor">{grouped.minor.length} Minor</span>
+          <span className="critical count-link" onClick={() => scrollToSection('critical')}>{grouped.critical.length} Critical</span>
+          <span className="major count-link" onClick={() => scrollToSection('major')}>{grouped.major.length} Major</span>
+          <span className="minor count-link" onClick={() => scrollToSection('minor')}>{grouped.minor.length} Minor</span>
         </div>
       </div>
 
@@ -61,7 +71,7 @@ function ApplicationDetail({ app, onSelectIssue }) {
             if (group.length === 0) return null;
 
             return (
-              <div key={severity} className="severity-group">
+              <div key={severity} className="severity-group" ref={el => sectionRefs.current[severity] = el}>
                 <div
                   className="severity-group-header"
                   onClick={() => toggleSection(severity)}

@@ -115,6 +115,17 @@ header button {
   font-weight: 600;
 }
 
+.count-link {
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.count-link:hover {
+  background: rgba(0,0,0,0.08);
+}
+
 .severity-groups {
   display: flex;
   flex-direction: column;
