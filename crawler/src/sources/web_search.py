@@ -1,3 +1,4 @@
+import time
 from urllib.parse import urlparse
 from duckduckgo_search import DDGS
 from .models import WebSearchResult
@@ -32,7 +33,9 @@ class WebSearch:
         seen_urls = set()
         results = []
 
-        for query in queries:
+        for i, query in enumerate(queries):
+            if i > 0:
+                time.sleep(1)
             raw_results = self._search_single_query(query)
             for item in raw_results:
                 url = item.get("href", "")
